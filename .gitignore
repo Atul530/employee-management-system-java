@@ -1,0 +1,60 @@
+# =========================
+# Java
+# =========================
+*.class
+
+# =========================
+# NetBeans
+# =========================
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+
+# NetBeans build output
+/build/
+/dist/
+
+# =========================
+# Eclipse
+# =========================
+.classpath
+.project
+.settings/
+
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs & Temporary Files
+# =========================
+*.log
+*.tmp
+*.temp
+
+# =========================
+# Java Crash Logs
+# =========================
+hs_err_pid*
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+*.env
+config.properties
+application-local.properties
