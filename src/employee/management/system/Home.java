@@ -51,7 +51,6 @@ public class Home extends JFrame implements ActionListener{
 
         setSize(1120, 630);
 
-        // Center the window on the screen
         setLocationRelativeTo(null);
 
         setVisible(true);
