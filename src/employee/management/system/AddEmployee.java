@@ -3,12 +3,20 @@ package employee.management.system;
 import java.awt.*;
 import javax.swing.*;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
-public class AddEmployee extends JFrame{
+public class AddEmployee extends JFrame implements ActionListener{
     
     Random ran=new Random();
     int number=ran.nextInt(999999);
+    
+    JComboBox cdeducation;
+    JDateChooser dcdob;
+    JTextField tfname,tffathername,tfdesignation,tfaddress,tfphone,tfsalary,tfaadhar,tfemail;
+    JLabel lblempId;
+    JButton add, back;
     
     AddEmployee(){
         getContentPane().setBackground(Color.WHITE);
@@ -24,7 +32,7 @@ public class AddEmployee extends JFrame{
         labelName.setFont(new Font("serif",Font.PLAIN,20));
         add(labelName);
         
-        JTextField tfname=new JTextField();
+        tfname=new JTextField();
         tfname.setBounds(200,150,150,30);
         add(tfname);
         
@@ -33,7 +41,7 @@ public class AddEmployee extends JFrame{
         labelfName.setFont(new Font("serif",Font.PLAIN,20));
         add(labelfName);
         
-        JTextField tffathername=new JTextField();
+        tffathername=new JTextField();
         tffathername.setBounds(600,150,150,30);
         add(tffathername);
         
@@ -42,7 +50,7 @@ public class AddEmployee extends JFrame{
         labelDOB.setFont(new Font("serif",Font.PLAIN,20));
         add(labelDOB);
         
-        JDateChooser dcdob=new JDateChooser();
+        dcdob=new JDateChooser();
         dcdob.setBounds(200,200,150,30);
         add(dcdob);
         
@@ -51,7 +59,7 @@ public class AddEmployee extends JFrame{
         labelsalary.setFont(new Font("serif",Font.PLAIN,20));
         add(labelsalary);
         
-        JTextField tfsalary=new JTextField();
+        tfsalary=new JTextField();
         tfsalary.setBounds(600,200,150,30);
         add(tfsalary);
         
@@ -60,7 +68,7 @@ public class AddEmployee extends JFrame{
         labeladdress.setFont(new Font("serif",Font.PLAIN,20));
         add(labeladdress);
         
-        JTextField tfaddress=new JTextField();
+        tfaddress=new JTextField();
         tfaddress.setBounds(200,250,150,30);
         add(tfaddress);
         
@@ -69,7 +77,7 @@ public class AddEmployee extends JFrame{
         labelphone.setFont(new Font("serif",Font.PLAIN,20));
         add(labelphone);
         
-        JTextField tfphone=new JTextField();
+        tfphone=new JTextField();
         tfphone.setBounds(600,250,150,30);
         add(tfphone);
         
@@ -78,7 +86,7 @@ public class AddEmployee extends JFrame{
         labelemail.setFont(new Font("serif",Font.PLAIN,20));
         add(labelemail);
         
-        JTextField tfemail=new JTextField();
+        tfemail=new JTextField();
         tfemail.setBounds(200,300,150,30);
         add(tfemail);
         
@@ -88,7 +96,7 @@ public class AddEmployee extends JFrame{
         add(labeleducation);
         
         String courses[]={"BBA","BCA","BA","B.COM","BTech","B.Sc","MBA","MCA","MA","M.COM","MTech","M.Sc","PHD"};
-        JComboBox cdeducation=new JComboBox(courses);
+        cdeducation=new JComboBox(courses);
         cdeducation.setBackground(Color.WHITE);
         cdeducation.setBounds(600,300,150,30);
         add(cdeducation);
@@ -98,7 +106,7 @@ public class AddEmployee extends JFrame{
         labeldesignation.setFont(new Font("serif",Font.PLAIN,20));
         add(labeldesignation);
         
-        JTextField tfdesignation=new JTextField();
+        tfdesignation=new JTextField();
         tfdesignation.setBounds(200,350,150,30);
         add(tfdesignation);
         
@@ -107,7 +115,7 @@ public class AddEmployee extends JFrame{
         labelaadhar.setFont(new Font("serif",Font.PLAIN,20));
         add(labelaadhar);
         
-        JTextField tfaadhar=new JTextField();
+        tfaadhar=new JTextField();
         tfaadhar.setBounds(600,350,150,30);
         add(tfaadhar);
         
@@ -116,21 +124,21 @@ public class AddEmployee extends JFrame{
         labelempId.setFont(new Font("serif",Font.PLAIN,20));
         add(labelempId);
         
-        JLabel lblempId=new JLabel(""+number);
+        lblempId=new JLabel(""+number);
         lblempId.setBounds(200,400,150,30);
         lblempId.setFont(new Font("serif",Font.PLAIN,20));
         add(lblempId);
         
-        JButton add = new JButton("Add Details");
+        add = new JButton("Add Details");
         add.setBounds(250, 550, 150, 40);
-//        add.addActionListener(this);
+        add.addActionListener(this);
         add.setBackground(Color.BLACK);
         add.setForeground(Color.WHITE);
         add(add);
         
-        JButton back = new JButton("Go Back");
+        back = new JButton("Go Back");
         back.setBounds(450, 550, 150, 40);
-//        add.addActionListener(this);
+        add.addActionListener(this);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         add(back);
@@ -139,6 +147,36 @@ public class AddEmployee extends JFrame{
         setLocation(300,50);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource()==add){
+            String name=tfname.getText();
+            String fname=tffathername.getText();
+            String dob=((JTextField) dcdob.getDateEditor().getUiComponent()).getText();
+            String salary=tfsalary.getText();
+            String address=tfaddress.getText();
+            String phone=tfphone.getText();
+            String email=tfemail.getText();
+            String education=(String) cdeducation.getSelectedItem();
+            String designation=tfdesignation.getText();
+            String aadhar=tfaadhar.getText();
+            String empId=lblempId.getText();
+            
+            try{
+                Conn conn=new Conn();
+                String query="insert into employee values('"+name+"','"+fname+"','"+dob+"','"+salary+"','"+address+"','"+phone+"','"+email+"','"+education+"','"+designation+"','"+aadhar+"','"+empId+"')";
+                conn.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null,"Details added successfully");
+                setVisible(false);
+                new Home();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }else{
+            setVisible(false);
+            new Home();
+        }
     }
     
     public static void main(String args[]){
