@@ -138,7 +138,7 @@ public class AddEmployee extends JFrame implements ActionListener{
         
         back = new JButton("Go Back");
         back.setBounds(450, 550, 150, 40);
-        add.addActionListener(this);
+        back.addActionListener(this);
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         add(back);

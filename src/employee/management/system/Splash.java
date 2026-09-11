@@ -31,6 +31,7 @@ public class Splash extends JFrame implements ActionListener{
         
         setSize(1170, 650);
         setLocation(400,200);
+        setLocationRelativeTo(null);
         setVisible(true);
         
         while(true){
