@@ -64,7 +64,8 @@ public class Home extends JFrame implements ActionListener{
             setVisible(false);
             new ViewEmployee();
         }else if(ae.getSource()==update){
-            
+            setVisible(false);
+            new UpdateEmployee();
         }else{
             
         }
